@@ -113,7 +113,7 @@ for cnt in range(0, 3 if len(jsonRes['entries']) > 3 else len(jsonRes['entries']
                             data = formData, 
                             files = {'activity[responses_attributes][0][body_image]': 
                                      (image_file, 
-                                      os.path.join(dir, image_file),
+                                      open(os.path.join(dir, image_file), 'rb'),
                                       'image/jpeg'
                                      )})
         print "uploading image to champions: " + "success" if res.status_code == 200 else "failure"
