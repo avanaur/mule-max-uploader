@@ -15,7 +15,8 @@ import ConfigParser
 # CONFIGURATION
 
 config = ConfigParser.RawConfigParser()
-config.read('champions-max.cfg')
+dir = os.path.dirname(__file__)
+config.read(os.path.join(dir, 'champions-max.cfg'))
 
 # dropbox auth token
 auth_header = config.get('Dropbox', 'auth_header')
@@ -82,7 +83,7 @@ for cnt in range(0, 3 if len(jsonRes['entries']) > 3 else len(jsonRes['entries']
     res = requests.post('https://content.dropboxapi.com/2/files/download', headers=headerData, stream=True)
     print "image retrieval: " + "success" if res.status_code == 200 else "failure"
     if res.status_code == 200:
-        with open(image_file, 'wb') as f:
+        with open(os.path.join(dir, image_file), 'wb') as f:
             res.raw.decode_content = True
             shutil.copyfileobj(res.raw, f)
         print "local copy saved"
@@ -112,13 +113,13 @@ for cnt in range(0, 3 if len(jsonRes['entries']) > 3 else len(jsonRes['entries']
                             data = formData, 
                             files = {'activity[responses_attributes][0][body_image]': 
                                      (image_file, 
-                                      open(image_file, 'rb'),
+                                      os.path.join(dir, image_file),
                                       'image/jpeg'
                                      )})
         print "uploading image to champions: " + "success" if res.status_code == 200 else "failure"
         
-        # delete local copy
-        os.remove(image_file)
+        # delete local copy        
+        os.remove(os.path.join(dir, image_file))
         print "local copy deleted"
 
         # move dropbox copy
