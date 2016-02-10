@@ -116,7 +116,7 @@ for cnt in range(0, 3 if len(jsonRes['entries']) > 3 else len(jsonRes['entries']
                                       open(os.path.join(dir, image_file), 'rb'),
                                       'image/jpeg'
                                      )})
-        print "uploading image to champions: " + "success" if res.status_code == 200 else "failure"
+        print "uploading image to champions: success" if res.status_code == 200 else "uploading image to champions: failure"
         
         # delete local copy        
         os.remove(os.path.join(dir, image_file))
@@ -132,7 +132,7 @@ for cnt in range(0, 3 if len(jsonRes['entries']) > 3 else len(jsonRes['entries']
             'Content-Type': 'application/json'
         }
         res = requests.post('https://api.dropboxapi.com/2/files/move', json=bodyData, headers=headerData, stream=True)
-        print "archiving image: " + "success" if res.status_code == 200 else "failure"
+        print "archiving image: success" if res.status_code == 200 else "archiving image: failure"
 
 
 # In[9]:
