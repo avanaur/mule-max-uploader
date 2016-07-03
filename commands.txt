@@ -1,8 +1,0 @@
-# Redeploy files
-
-pscp -i "C:\Users\Tyrone\Dropbox\tyrone.ppk" "C:\Files\ipython\max_photo\champions-max-uploader-v1.py" ec2-user@ec2-52-77-242-139.ap-southeast-1.compute.amazonaws.com:/home/ec2-user/max-uploader
-
-pscp -i "C:\Users\Tyrone\Dropbox\tyrone.ppk" "C:\Files\ipython\max_photo\champions-max.cfg" ec2-user@ec2-52-77-242-139.ap-southeast-1.compute.amazonaws.com:/home/ec2-user/max-uploader
-
-# Crontab settings
-0 9 * * * python /home/ec2-user/max-uploader/champions-max-uploader-v1.py >> /home/ec2-user/max-uploader/results.log 2>&1
